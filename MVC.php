@@ -34,11 +34,12 @@ class MVC {
         $path = $_SERVER['REQUEST_URI'];
 
         if (isset($this->pathPrefix)) {
-            if (substr($path, 0, strlen($this->$pathPrefix)) == $this->$pathPrefix) {
-                $path = substr($path, strlen($this->$pathPrefix));
+            if (substr($path, 0, strlen($this->pathPrefix)) == $this->pathPrefix) {
+                $path = substr($path, strlen($this->pathPrefix));
                 $path = trim($path, '/');
             }
         }
+        echo $path;
 
         $handler = $this->getHandler($method, $path);
         if ($handler === null) {
@@ -47,21 +48,23 @@ class MVC {
                 $handler = [$this->routes[SPEC][404], [$path]];
             }
             else {
-                throw new Exception('No handler found for the route nor was a 404 handler available.');
+                throw new Exception('No handler found for "'.$method.'" "'.$path.'" nor was a 404 handler available.');
             }
         }
 
         $class = $handler[0][0];
         $method = $handler[0][1];
-        $arguments = $handler[1];
 
         if (!class_exists($class)) {
             throw new Exception('Class "'.$class.'" does not exist.');
         }
+
         $controller = new $class($this);
         if (!method_exists($controller, $method)) {
             throw new Exception('Class "'.$class.'" does not have method "'.$method.'".');
         }
+
+        $arguments = $handler[1];
 
         $controller->$method($arguments);
     }
