@@ -10,8 +10,17 @@ class UserManager extends MVCControllerBase {
 
 
     public function login() {
-        parent::createPageWithContentLambda(null);
+        parent::createPageWithContent(null);
     }
 
+    public function register() {
+        parent::createPageWithContent(function () {
+            $this->application->view->create('register');
+        });
+    }
+
+    public function performRegister() {
+
+    }
 
 }

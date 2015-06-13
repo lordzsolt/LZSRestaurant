@@ -12,12 +12,12 @@ class MVCControllerBase {
 
     function __construct($app) {
         if (!isset($app) || !is_a($app, 'MVC')) {
-            throw new \Exception('The $app argument should point to a valid MVC application.');
+            throw new Exception('The $app argument must point to a valid MVC application.');
         }
         $this->application = $app;
     }
 
-    protected function createPageWithContentLambda($method) {
+    protected function createPageWithContent($method) {
         $this->application->view->create('header', null);
 
         $this->beginContainer();

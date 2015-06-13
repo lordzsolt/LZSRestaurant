@@ -9,7 +9,7 @@
 class Restaurant extends MVCControllerBase  {
 
     public function home() {
-        parent::createPageWithContentLambda(function () {
+        parent::createPageWithContent(function () {
             $this->application->view->create('menu', null);
             $this->application->view->create('news', null);
         });
