@@ -43,7 +43,6 @@ class MVC {
                 $path = trim($path, '/');
             }
         }
-        echo $path;
 
         $handler = $this->getHandler($method, $path);
         if ($handler === null) {

@@ -27,14 +27,26 @@
 <nav class="navbar navbar-default" role="navigation">
 	<div class="container">
 		<ul class="nav nav-pills navbar-nav navbar-left">
-			<li class="active"><a href="index.html">Menu</a></li>
-			<li><a href="#">My Order</a></li>
+			<li><a href="index">Menu</a></li>
+
+			<?php if (isset($isLoggedIn) && $isLoggedIn): ?>
+				<li><a href="#">My Order</a></li>
+			<?php endif; ?>
+
 		</ul>
 		<ul class="nav nav-pills navbar-nav navbar-right">
-			<li><a href="#">My Info</a></li>
-			<li><a href="#">Admin</a></li>
-			<li><a href="#">Register</a></li>
-			<li><a href="#">Login</a></li>
+			<?php if (isset($isLoggedIn) && $isLoggedIn): ?>
+				<li><a href="myinfo">My Info</a></li>
+			<?php endif; ?>
+
+			<?php if (isset($isLoggedIn) && $isLoggedIn && isset($isAdmin) && $isAdmin): ?>
+				<li><a href="#">Admin</a></li>
+			<?php endif; ?>
+
+			<?php if (!isset($isLoggedIn) || !$isLoggedIn): ?>
+				<li><a href="#">Register</a></li>
+				<li><a href="login">Login</a></li>
+			<?php endif; ?>
 		</ul>
 	</div>
 </nav>
