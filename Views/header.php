@@ -30,7 +30,7 @@
 			<li><a href="index">Menu</a></li>
 
 			<?php if (isset($isLoggedIn) && $isLoggedIn): ?>
-				<li><a href="#">My Order</a></li>
+				<li><a href="myorder">My Order</a></li>
 			<?php endif; ?>
 
 		</ul>
@@ -40,11 +40,11 @@
 			<?php endif; ?>
 
 			<?php if (isset($isLoggedIn) && $isLoggedIn && isset($isAdmin) && $isAdmin): ?>
-				<li><a href="#">Admin</a></li>
+				<li><a href="admin">Admin</a></li>
 			<?php endif; ?>
 
 			<?php if (!isset($isLoggedIn) || !$isLoggedIn): ?>
-				<li><a href="#">Register</a></li>
+				<li><a href="register">Register</a></li>
 				<li><a href="login">Login</a></li>
 			<?php endif; ?>
 		</ul>

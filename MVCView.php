@@ -11,7 +11,7 @@ class MVCView {
     public function create($path, $vars = null) {
         $file = 'Views/'.$path.'.php';
         if (!file_exists($file)) {
-            throw new Exception('The $path argument points to a non-existent template: "'.$path.'".');
+            throw new Exception('The $path argument points to a non-existent view: "'.$path.'".');
         }
         if (!empty($vars)) {
             extract($vars);
