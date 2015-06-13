@@ -8,7 +8,6 @@
 
 define ('GET', 'GET');
 define ('POST', 'POST');
-define ('SPEC', 'SPECIAL');
 
 class MVC {
 
@@ -23,8 +22,7 @@ class MVC {
     function __construct() {
         $this->routes = [
             GET => [],
-            POST => [],
-            SPEC => []
+            POST => []
         ];
 
         $this->view = new MVCView();
@@ -49,13 +47,7 @@ class MVC {
 
         $handler = $this->getHandler($method, $path);
         if ($handler === null) {
-            header('HTTP/1.0 404 Not Found', true, 404);
-            if (isset($this->routes[SPEC][404])) {
-                $handler = [$this->routes[SPEC][404], [$path]];
-            }
-            else {
-                throw new Exception('No handler found for "'.$method.'" "'.$path.'" nor was a 404 handler available.');
-            }
+            throw new Exception('No handler found for "'.$method.'" "'.$path.'".');
         }
 
         $class = $handler[0][0];
