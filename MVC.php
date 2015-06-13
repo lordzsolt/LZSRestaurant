@@ -16,12 +16,18 @@ class MVC {
 
     public $pathPrefix;
 
+    public $view;
+
+    public $database;
+
     function __construct() {
         $this->routes = [
             GET => [],
             POST => [],
             SPEC => []
         ];
+
+        $this->view = new MVCView();
     }
 
     public function addRoute($method, $path, $handler) {
@@ -64,9 +70,7 @@ class MVC {
             throw new Exception('Class "'.$class.'" does not have method "'.$method.'".');
         }
 
-        $arguments = $handler[1];
-
-        $controller->$method($arguments);
+        $controller->$method();
     }
 
     private function getHandler($method, $path) {

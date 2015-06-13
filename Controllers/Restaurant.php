@@ -9,6 +9,6 @@
 class Restaurant extends MVCControllerBase  {
 
     public function home() {
-
+        $this->application->view->create('header', null);
     }
 }

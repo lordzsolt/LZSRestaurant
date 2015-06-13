@@ -8,13 +8,13 @@
 
 class MVCControllerBase {
 
-    public $app;
+    public $application;
 
     function __construct($app) {
         if (!isset($app) || !is_a($app, 'MVC')) {
             throw new \Exception('The $app argument should point to a valid MVC application.');
         }
-        $this->app = $app;
+        $this->application = $app;
     }
 
 }
