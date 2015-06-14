@@ -16,19 +16,19 @@
     <form  method="post" action="register">
         <div class="form-group">
             <label for="username">Username:</label>
-            <input type="text" class="form-control" name="username" id="username" required>
+            <input type="text" class="form-control" name="username" id="username" required value="test">
         </div>
         <div class="form-group">
             <label for="email">Email Address:</label>
-            <input type="text" class="form-control" name="email" id="email" required>
+            <input type="text" class="form-control" name="email" id="email" required value="test@test.test">
         </div>
         <div class="form-group">
             <label for="password">Password:</label>
-            <input type="password" class="form-control" name="password" id="password" required>
+            <input type="password" class="form-control" name="password" id="password" required value="A1234567">
         </div>
         <div class="form-group">
             <label for="rePassword">Confirm password:</label>
-            <input type="password" class="form-control" name="rePassword" id="rePassword" required>
+            <input type="password" class="form-control" name="rePassword" id="rePassword" required value="A1234567">
         </div>
 <!--        <div class="form-group">-->
 <!--            <div class="checkbox agree-checkbox">-->
