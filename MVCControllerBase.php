@@ -17,8 +17,8 @@ abstract class MVCControllerBase {
         $this->application = $app;
     }
 
-    protected function createPageWithContent($method) {
-        $this->application->view->create('header', null);
+    protected function createPageWithContent($parameters, $method) {
+        $this->application->view->create('header', $parameters);
 
         $this->beginContainer();
         if (!is_null($method)) {
@@ -26,7 +26,7 @@ abstract class MVCControllerBase {
         }
         $this->endContainer();
 
-        $this->application->view->create('footer', null);
+        $this->application->view->create('footer', $parameters);
     }
 
     public function beginContainer() {
