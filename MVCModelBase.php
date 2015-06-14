@@ -27,8 +27,9 @@ abstract class  MVCModelBase {
         }
 
         $result = $this->application->database->executeQuery($sql, $parameters);
-
         $class = get_class($this);
+
+        $foundObjects = [];
         foreach($result as $item) {
             $object = new $class($this->application);
 
@@ -36,10 +37,10 @@ abstract class  MVCModelBase {
                 $object->$key = $value;
             }
 
-            $result[] = $object;
+            $foundObjects[] = $object;
         }
 
-        return $result;
+        return $foundObjects;
     }
 
     public function save() {
@@ -77,9 +78,11 @@ abstract class  MVCModelBase {
         if (!is_null($result) && !isset($this->id)) {
             $this->id = (int)$this->application->database->lastInsertedId();
         }
+
+        return $result;
     }
 
-    private function getAllFields() {
+    public function getAllFields() {
         $fields = [];
 
         $reflection = new ReflectionClass($this);

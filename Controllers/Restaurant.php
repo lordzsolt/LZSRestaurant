@@ -9,9 +9,10 @@
 class Restaurant extends MVCControllerBase  {
 
     public function home() {
-        parent::createPageWithContent(function () {
-            $this->application->view->create('menu', null);
-            $this->application->view->create('news', null);
-        });
+        parent::createPageWithContent(UserManager::getCookieInfo(),
+            function () {
+                $this->application->view->create('menu', null);
+                $this->application->view->create('news', null);
+            });
     }
 }

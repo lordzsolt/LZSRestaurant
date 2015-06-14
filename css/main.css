@@ -21,3 +21,7 @@
 .error_message {
     color: red;
 }
+
+.no-border {
+    border: 0px transparent;
+}

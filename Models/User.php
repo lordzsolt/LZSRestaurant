@@ -22,6 +22,10 @@ class User extends MVCModelBase {
 
     public $type;
 
+    public static function getTable() {
+        return 'user';
+    }
+
     public static function createWithParameters($app, $id, $username, $password, $email, $name, $classId, $type) {
         $instance = new self($app);
         $instance->id = $id;
@@ -35,11 +39,40 @@ class User extends MVCModelBase {
         return $instance;
     }
 
-    public static function getTable() {
-        return 'user';
+    public function getUserWithCredentials($identifier, $password) {
+
+        $result = $this->getAllWhere('username = ? OR email = ?', [$identifier, $identifier]);
+        if (count($result) == 0) {
+            return null;
+        }
+
+        $foundUser = $result[0];
+        if (!$foundUser->comparePassword($password)) {
+            return null;
+        }
+
+        return $foundUser;
+    }
+
+    public function getCookieInfo() {
+        return [
+            'userId' => $this->id,
+            'name' => $this->name,
+            'username' => $this->username,
+            'email' => $this->email,
+            'userType' => $this->type
+        ];
     }
 
     private static function encryptPassword($password) {
-        return $password;
+        $options = [
+            'cost' => 10
+        ];
+        $hash = password_hash($password, PASSWORD_BCRYPT, $options);
+        return $hash;
+    }
+
+    private function comparePassword($password) {
+        return password_verify($password, $this->password);
     }
 }
