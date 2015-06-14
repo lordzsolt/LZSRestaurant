@@ -43,7 +43,40 @@ abstract class  MVCModelBase {
     }
 
     public function save() {
+        $fields = $this->getAllFields();
 
+        //Shift to remove id field
+        array_shift($fields);
+
+        if (isset($this->id)) {
+            $sql = 'update '.$this->getTable().' set ';
+            $parameters = [];
+
+            foreach ($fields as $field) {
+                $sql .= $field.' = ?, ';
+                $parameters[] = $this->$field;
+            }
+
+            $sql = rtrim($sql, ', ').' where id = ? limit 1';
+            $parameters[] = $this->id;
+        }
+        else {
+            $sql = 'insert into '.$this->getTable().' ('.join(', ', $fields).') values (';
+            $parameters = [];
+
+            foreach ($fields as $field) {
+                $sql .= '?, ';
+                $parameters[] = $this->$field;
+            }
+
+            $sql = rtrim($sql, ', ').')';
+        }
+
+        $result = $this->application->database->executeCommand($sql, $parameters);
+
+        if (!is_null($result) && !isset($this->id)) {
+            $this->id = (int)$this->application->database->lastInsertedId();
+        }
     }
 
     private function getAllFields() {

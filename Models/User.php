@@ -22,21 +22,24 @@ class User extends MVCModelBase {
 
     public $type;
 
-    function __construct($id, $username, $password, $email, $name, $classId, $type) {
-        $this->id = $id;
-        $this->username = $username;
-        $this->password = $this->encryptPassword($password);
-        $this->email = $email;
-        $this->name = $name;
-        $this->classId = $classId;
-        $this->type = $type;
+    public static function createWithParameters($app, $id, $username, $password, $email, $name, $classId, $type) {
+        $instance = new self($app);
+        $instance->id = $id;
+        $instance->username = $username;
+        $instance->password = static::encryptPassword($password);
+        $instance->email = $email;
+        $instance->name = $name;
+        $instance->classId = $classId;
+        $instance->type = $type;
+
+        return $instance;
     }
 
     public static function getTable() {
         return 'user';
     }
 
-    private function encryptPassword($password) {
+    private static function encryptPassword($password) {
         return $password;
     }
 }

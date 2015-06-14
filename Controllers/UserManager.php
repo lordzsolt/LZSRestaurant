@@ -48,7 +48,7 @@ class UserManager extends MVCControllerBase {
             goto endOfFunction;
         }
 
-        $user = new User(null, $username, $password, $email, null, null, 0);
+        $user = User::createWithParameters($this->application, null, $username, $password, $email, null, null, 0);
         if (!$user->save()) {
             $error = 'An error occurred while registering. Please try again.';
             goto endOfFunction;
