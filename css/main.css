@@ -17,3 +17,7 @@
 .content {
 
 }
+
+.error_message {
+    color: red;
+}
