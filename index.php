@@ -4,8 +4,8 @@ include "autoloader.php";
 
 define('SERVER_NAME', 'localhost');
 define('DATABASE_NAME', 'lzsrestaurant');
-define('DATABASE_USER_NAME', 'admin');
-define('DATABASE_PASSWORD', 'admin');
+define('DATABASE_USER_NAME', 'restaurant');
+define('DATABASE_PASSWORD', 'randompassword');
 
 $application = new MVC();
 

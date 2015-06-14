@@ -26,6 +26,9 @@ class MVC {
         ];
 
         $this->view = new MVCView();
+
+        session_id('dining');
+        session_start();
     }
 
     public function addRoute($method, $path, $handler) {
@@ -46,14 +49,14 @@ class MVC {
 
         $handler = $this->getHandler($method, $path);
         if ($handler === null) {
-            throw new Exception('No handler found for "'.$method.'" "'.$path.'".');
+            throw new Exception('Undefined handler for "'.$method.'" with "'.$path.'".');
         }
 
         $class = $handler[0][0];
         $method = $handler[0][1];
 
         if (!class_exists($class)) {
-            throw new Exception('Class "'.$class.'" does not exist.');
+            throw new Exception('Nonexistent class: "'.$class.'"');
         }
 
         $controller = new $class($this);
