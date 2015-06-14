@@ -6,7 +6,7 @@
  * Time: 01:29
  */
 
-class MVCControllerBase {
+abstract class MVCControllerBase {
 
     public $application;
 

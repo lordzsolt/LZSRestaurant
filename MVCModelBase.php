@@ -6,6 +6,6 @@
  * Time: 13:48
  */
 
-class MVCModelBase {
+abstract class  MVCModelBase {
 
 }
