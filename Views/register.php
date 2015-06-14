@@ -8,6 +8,11 @@
 -->
 
 <div class="col-md-6 col-md-offset-3">
+    <?php if (isset($error) ): ?>
+        <div class="form-group">
+            <label class="error_message"><?=$error?></label>
+        </div>
+    <?php endif; ?>
     <form  method="post" action="register">
         <div class="form-group">
             <label for="username">Username:</label>
